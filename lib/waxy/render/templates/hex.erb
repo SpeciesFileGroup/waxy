@@ -1,0 +1,6 @@
+<% meta ||= Waxy::Meta.new %>
+<%= "<a href=\"#{meta.link}\" class=\"waxy__link\">" if meta.link %>
+<g>
+  <polygon fill="<%= color %>" stroke="white" points="<%= polygon_corners(hex).collect{|p| [p.x, p.y].join(',') }.join(' ') %>"></polygon>"
+</g>
+<%= '</a>' if meta.link %>

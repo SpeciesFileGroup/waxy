@@ -1,0 +1,32 @@
+<%= meta.hex_link_start %>
+<g class="waxy__hexagon">
+  <%= meta.hex_link_title %>
+  <% c = polygon_corners(hex) %>
+
+  <% triangles(hex).each_with_index do |t, i| %>
+    <%= "<a href=\"#{meta.pie_links[i]}\" class=\"waxy__pie_link\">" if meta.pie_links[i] %>
+    <polygon class="waxy__triangle"
+             fill="<%= meta.colors[i] %>" 
+             points="<%= t.collect{|p| [p.x + pad_w_offset, p.y + pad_h_offset].join(',') }.join(' ') %>" >
+    </polygon>
+    <%= "</a>" if meta.pie_links[i] %>
+  <% end %>   
+
+  <g stroke="white" width="2">
+    <% (0..2).each do |i| %>
+      <line 
+        x1="<%= c[i].x + pad_w_offset %>"
+        y1="<%= c[i].y + pad_h_offset %>"  
+        x2="<%= c[i + 3].x + pad_w_offset %>" 
+        y2="<%= c[i + 3].y + pad_h_offset %>"
+      />
+    <% end %>
+  </g>
+
+  <polygon stroke="<%= meta.stroke %>"
+     fill-opacity="0.0"
+     points="<%= c.collect{|p| [p.x + pad_w_offset, p.y + pad_h_offset].join(',') }.join(' ') %>">
+  </polygon>
+
+</g>
+<%= meta.hex_link_end %>
