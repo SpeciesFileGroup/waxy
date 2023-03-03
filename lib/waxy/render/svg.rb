@@ -86,14 +86,13 @@ module Waxy
         (0..h).each do |r|
           (0..h).each do |j|
             return str if metadata.size == 0
-            q = j - (r/2).floor
+            q = j - (r / 2).floor
             hex = Waxy::Geometry::Hex.new(q, r)
             str << Waxy::Render::Svg.hex_pie(layout, hex, metadata.pop)
           end
         end
         str
       end
-
 
       def self.rectangle(layout, metadata, w = 10, h = 10)
         str = ''
@@ -112,6 +111,18 @@ module Waxy
         str
       end
 
+      def self.rectangle_coords(w, h)
+        a = []
+        (0..h).each do |r|
+          a[r] ||= []
+          (0..w).each do |j|
+            q = j - (r/2).floor
+            a[r][j] ||= []
+            a[r][j] = [q, r]
+          end
+        end
+        a
+      end
 
       # Interesting capped layout 
       # r = i
